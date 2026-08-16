@@ -19,6 +19,7 @@ AIGC:
 [![Android](https://img.shields.io/badge/Android-8.0%2B-brightgreen.svg)](https://developer.android.com)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.0-purple.svg)](https://kotlinlang.org)
 [![APK Download](https://img.shields.io/badge/Download-APK-blue.svg)](https://github.com/Wang-qi-shuo/BuddyStudyGuard/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/Wang-qi-shuo/BuddyStudyGuard/android-build.yml?branch=main&label=build)](https://github.com/Wang-qi-shuo/BuddyStudyGuard/actions)
 
 ## 功能特性
 
@@ -36,9 +37,22 @@ AIGC:
 - **聊天传图**：与家长互发文字/图片，图片支持保存到相册
 - **AI 学习助手**：豆包大模型多轮对话，支持拍照提问，离线降级本地 FAQ
 
-## 截图
+## 功能截图
 
-> 截图即将补充
+| 登录页 | 家长总览 |
+|--------|----------|
+| ![登录页](docs/screenshots/01-login.png) | ![家长总览](docs/screenshots/02-home.png) |
+| 账号密码登录，自动加入家庭组实现双端同步 | 家长端总览：今日时长、任务进度一目了然 |
+
+| 应用控制 | 消息 |
+|----------|------|
+| ![应用控制](docs/screenshots/03-restriction.png) | ![消息](docs/screenshots/04-chat.png) |
+| 一键锁定应用、设置时长限额与禁用时段 | 与孩子互发文字与图片消息，图片可保存到相册 |
+
+| 布置任务 | 数据报告 |
+|----------|----------|
+| ![布置任务](docs/screenshots/05-task.png) | ![报告](docs/screenshots/06-report.png) |
+| 创建学习任务并实时推送到孩子任务板 | 学习/游戏时长分布与任务完成度报告 |
 
 ## 技术栈
 
