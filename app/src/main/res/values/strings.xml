@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">弟管严</string>
+    <string name="app_name_en">BuddyStudyGuard</string>
+
+    <!-- 角色 -->
+    <string name="role_child">孩子模式</string>
+    <string name="role_parent">家长模式</string>
+
+    <!-- 底部导航：孩子模式 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_chat">聊天</string>
+    <string name="nav_tasks">任务</string>
+    <string name="nav_schedule">课表</string>
+    <string name="nav_focus">专注</string>
+    <string name="nav_stats">统计</string>
+    <string name="nav_ai">AI 助手</string>
+
+    <!-- 底部导航：家长模式 -->
+    <string name="nav_parent_dashboard">总览</string>
+    <string name="nav_parent_apps">应用控制</string>
+    <string name="nav_parent_messages">消息</string>
+    <string name="nav_parent_tasks">布置任务</string>
+    <string name="nav_parent_reports">报告</string>
+
+    <!-- 家长入口 -->
+    <string name="parent_entry_hint">请输入家长口令</string>
+    <string name="parent_entry_wrong">口令错误</string>
+    <string name="parent_entry_title">家长模式</string>
+
+    <!-- 权限说明 -->
+    <string name="perm_usage_stats_title">应用使用统计权限</string>
+    <string name="perm_usage_stats_desc">我们需要统计各应用的使用时长，帮你管理游戏时间。数据只存在你手机上，不会上传。</string>
+    <string name="perm_overlay_title">悬浮窗权限</string>
+    <string name="perm_overlay_desc">当游戏时间到了，需要一个全屏提醒告诉你该休息了。</string>
+    <string name="perm_accessibility_title">无障碍服务权限</string>
+    <string name="perm_accessibility_desc">仅用于在超时或禁用时段把你从游戏里送回桌面，不读取任何界面内容，不涉及隐私。</string>
+    <string name="perm_notification_title">通知权限</string>
+    <string name="perm_notification_desc">用于接收学习提醒和任务到期通知。</string>
+
+    <!-- 限制相关 -->
+    <string name="limit_foreground_notification_title">学习监护运行中</string>
+    <string name="limit_foreground_notification_text">正在守护你的学习时间</string>
+    <string name="limit_time_up_title">时间到啦！</string>
+    <string name="limit_time_up_text">今天的游戏时长已经用完，休息一下眼睛吧～</string>
+    <string name="limit_blocked_period_title">现在是禁用时段</string>
+    <string name="limit_blocked_period_text">这个时间段不能打开这个应用哦</string>
+    <string name="limit_locked_title">该应用已被锁定</string>
+    <string name="limit_locked_text">家长已锁定此应用</string>
+
+    <!-- AI -->
+    <string name="ai_title">AI 学习助手</string>
+    <string name="ai_input_hint">输入你的学习问题…</string>
+    <string name="ai_offline_hint">当前无网络，显示的是离线常见问答。联网后可继续与 AI 对话。</string>
+    <string name="ai_error">出错了，点这里重试</string>
+    <string name="ai_disclaimer">仅限学习话题答疑</string>
+
+    <!-- 通用 -->
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="add">添加</string>
+    <string name="back">返回</string>
+    <string name="empty">暂无数据</string>
+</resources>

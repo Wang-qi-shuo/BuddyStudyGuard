@@ -1,6 +1,17 @@
+---
+AIGC:
+    Label: "1"
+    ContentProducer: 001191440300708461136T1XGW3
+    ProduceID: 061a0cddaa82373f1653d85953832b66_b72330c1994311f1a98a525400f8a581
+    ReservedCode1: Q6TVqs98gCwj2fuXSwh8zoJEkh4QJIrqNrpPzPIzlLeua6CTXOxBqSVCql6hjL5JVmUvuwkRMHTk1utN4phAGa1jpi8ga6n9GCXCZjXjp5WWzhrek2gb34ST4u0pg4IZmWssH5T4WuoW+O6mXMmYgydQTrnf6hBlFi+ymasykFF7qgUfl1HolpsfHEI=
+    ContentPropagator: 001191440300708461136T1XGW3
+    PropagateID: 061a0cddaa82373f1653d85953832b66_b72330c1994311f1a98a525400f8a581
+    ReservedCode2: Q6TVqs98gCwj2fuXSwh8zoJEkh4QJIrqNrpPzPIzlLeua6CTXOxBqSVCql6hjL5JVmUvuwkRMHTk1utN4phAGa1jpi8ga6n9GCXCZjXjp5WWzhrek2gb34ST4u0pg4IZmWssH5T4WuoW+O6mXMmYgydQTrnf6hBlFi+ymasykFF7qgUfl1HolpsfHEI=
+---
+
 # 弟管严 (BuddyStudyGuard)
 
-一款为弟弟开发的学习与监护 Android 应用，安装在他自己的手机上（弟弟完全知情并同意）。应用内分「孩子模式」和「家长模式」，所有数据存于本地，仅 AI 助手需联网调用豆包大模型 API。
+一款为弟弟开发的学习与监护 Android 应用，安装在他自己的手机上（弟弟完全知情并同意）。应用内分「孩子模式」和「家长模式」。数据以本地 Room 为唯一数据源，并已接入腾讯云 CloudBase 云端同步：限制规则、使用时长、消息、任务、应用清单等可在多台设备间跨设备互通；AI 助手需联网调用豆包大模型 API。
 
 ## 技术栈
 
@@ -12,7 +23,7 @@
 | 架构 | MVVM + Repository |
 | 依赖注入 | Hilt |
 | 本地存储 | Room（唯一本地数据源） |
-| 网络 | Retrofit + OkHttp + Gson（仅 AI 模块） |
+| 网络 | Retrofit + OkHttp + Gson（AI 模块 + CloudBase 云端同步） |
 | 异步 | Coroutines + Flow |
 | 后台 | WorkManager + 前台 Service |
 | 图表 | Compose Canvas 手绘（无第三方图表库） |
@@ -32,6 +43,7 @@ BuddyStudyGuard/
 │       │   ├── BuddyStudyGuardApp.kt  # @HiltAndroidApp + WorkManager Configuration
 │       │   ├── MainActivity.kt        # 单 Activity + Compose
 │       │   ├── common/
+│       │   │   ├── cloud/             # CloudBase 云端同步（CloudBaseManager + CloudBaseApi + CloudSyncRepository）
 │       │   │   ├── di/                # DatabaseModule
 │       │   │   ├── data/db/           # AppDatabase + 12 Entity + 11 DAO
 │       │   │   ├── ui/theme/          # 像素+科技风主题（PixelCyan/NeonPurple/AmberWarn）
@@ -60,7 +72,12 @@ BuddyStudyGuard/
 2. 等待 Gradle Sync 完成（首次会下载依赖）。
 3. 连接 Android 8.0+ 真机，点 Run。
 
-> 命令行编译：`./gradlew :app:assembleDebug`
+> 命令行编译：项目未内置 `gradlew.bat`，请使用本机 Gradle 8.9 的 `gradle.bat` 或直接用 Android Studio 构建。示例（PowerShell）：
+>
+> ```powershell
+> $env:JAVA_HOME = "G:\Android\jdk21"
+> & "C:\Users\DELL\.gradle\wrapper\dists\gradle-8.9-bin\78qddjpeqn5v6yec3xb8kv9ca\gradle-8.9\bin\gradle.bat" :app:assembleDebug --console=plain
+> ```
 
 ## 豆包 API Key 配置
 
@@ -127,7 +144,7 @@ Key 申请：火山引擎控制台 → 方舟大模型 → 创建 API Key。模�
 
 ## 数据安全
 
-- 所有监控数据仅存储在本地 Room 数据库，**绝不上传**。
+- 本地 Room 数据库为唯一数据源；已接入 CloudBase 云端同步（限制规则、使用时长、消息、任务、应用清单等跨设备互通），云端数据仅用于多设备同步，不对外公开。
 - 无障碍服务不读取界面内容，仅用于执行「返回桌面」动作。
 - 家长口令以 SHA-256 加盐哈希存储，不存明文。
 - 应用不包含任何监控通讯内容的功能。
@@ -135,6 +152,5 @@ Key 申请：火山引擎控制台 → 方舟大模型 → 创建 API Key。模�
 ## 已知限制 / 后续优化
 
 - `UsageOverviewScreen`（孩子应用使用概览）已实现，导航入口待接入（可从首页或统计页加入口）。
-- 前台监护服务当前未自动启动，需在家长模式授权无障碍后手动触发（可加「启动监护」按钮）。
-- 豆包多模态（拍照提问）为预留，当前仅文本对话。
 - 在线题库接口为预留，当前版本未实现。
+*（内容由AI生成，仅供参考）*
