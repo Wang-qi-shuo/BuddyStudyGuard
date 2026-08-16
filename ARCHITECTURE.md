@@ -171,8 +171,8 @@ com.buddy.studyguard/
 运行方式：
 
 ```powershell
-$env:JAVA_HOME = "G:\Android\jdk21"
-& "C:\Users\DELL\.gradle\wrapper\dists\gradle-8.9-bin\78qddjpeqn5v6yec3xb8kv9ca\gradle-8.9\bin\gradle.bat" :app:testDebugUnitTest --console=plain
+$env:JAVA_HOME = "你的JDK路径"
+& "你的Gradle路径\bin\gradle.bat" :app:testDebugUnitTest --console=plain
 ```
 
 说明：
