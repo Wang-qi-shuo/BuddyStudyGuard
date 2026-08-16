@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- 本地数据库与偏好参与备份 -->
+    <include domain="database" path="buddy_study_guard.db" />
+</full-backup-content>
