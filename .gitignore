@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+
+# Android build outputs
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Logs / crash dumps
+*.log
+hs_err_pid*.log
+*.hprof
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keystore / signing
+*.keystore
+*.jks
+*.p12
+*.pfx
