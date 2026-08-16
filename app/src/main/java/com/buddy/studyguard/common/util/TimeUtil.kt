@@ -47,9 +47,12 @@ object TimeUtil {
     fun isMinuteInWindow(nowMinute: Int, startMinute: Int, endMinute: Int): Boolean {
         return if (endMinute > startMinute) {
             nowMinute in startMinute until endMinute
-        } else {
+        } else if (endMinute < startMinute) {
             // 跨天，如 22:00(1320) - 06:00(360)
             nowMinute >= startMinute || nowMinute < endMinute
+        } else {
+            // start == end：空窗口，不命中
+            false
         }
     }
 

@@ -99,12 +99,12 @@ BuddyStudyGuard/
 │       │   ├── BuddyStudyGuardApp.kt  # @HiltAndroidApp + WorkManager Configuration
 │       │   ├── MainActivity.kt        # 单 Activity + Compose
 │       │   ├── common/
-│       │   │   ├── cloud/             # CloudBase 云端同步（CloudBaseManager + CloudBaseApi + CloudSyncRepository）
+│       │   │   ├── cloud/             # CloudBase 云端同步（CloudBaseManager + CloudBaseApiService + CloudSyncRepository + RestrictionSyncWorker + UsageReportWorker + InstalledAppReporter）
 │       │   │   ├── di/                # DatabaseModule
-│       │   │   ├── data/db/           # AppDatabase + 12 Entity + 11 DAO
+│       │   │   ├── data/db/           # AppDatabase + 13 Entity + 12 DAO
 │       │   │   ├── ui/theme/          # 像素+科技风主题（PixelCyan/NeonPurple/AmberWarn）
 │       │   │   └── util/              # Constants/TimeUtil/AppClassifier/PermissionUtil/NetworkUtil/PinHasher
-│       │   ├── monitor/               # 监护模块（离线）
+│       │   ├── monitor/               # 监护模块（学生端核心：限制拦截 + 时长统计）
 │       │   │   ├── usage/UsageStatsHelper
 │       │   │   ├── engine/RestrictionEngine
 │       │   │   ├── service/           # 前台服务 + 无障碍服务 + 全屏提醒 + 开机自启
@@ -114,9 +114,9 @@ BuddyStudyGuard/
 │       │   │   ├── data/local/FaqRepository   # 20+ 离线学习 FAQ
 │       │   │   ├── data/repository/AiChatRepository
 │       │   │   └── ui/                # AiChatScreen + ViewModel
-│       │   ├── study/                 # 孩子模块 UI（离线）
+│       │   ├── study/                 # 孩子模块 UI
 │       │   │   └── ui/                # Home/TaskBoard/Schedule/FocusTimer/Stats/Usage
-│       │   ├── parent/                # 家长模块 UI（离线）
+│       │   ├── parent/                # 家长模块 UI
 │       │   │   └── ui/                # Entry/Pin/Dashboard/AppControl/Message/Task/Report
 │       │   └── navigation/AppNavGraph # 顶层导航
 │       └── res/                       # 主题/字符串/图标/无障碍配置
@@ -134,6 +134,25 @@ BuddyStudyGuard/
 > $env:JAVA_HOME = "G:\Android\jdk21"
 > & "C:\Users\DELL\.gradle\wrapper\dists\gradle-8.9-bin\78qddjpeqn5v6yec3xb8kv9ca\gradle-8.9\bin\gradle.bat" :app:assembleDebug --console=plain
 > ```
+
+## 单元测试
+
+项目为纯逻辑类（时间工具、限制决策引擎、图片编解码）编写了 **47 个单元测试**，位于 `app/src/test/java/com/buddy/studyguard/`：
+
+| 测试类 | 用例数 | 覆盖内容 |
+|--------|--------|----------|
+| `TimeUtilTest` | 28 | 时间计算、星期掩码 `isTodayInMask`、`isMinuteInWindow`（跨天/空窗口/非法参数）、格式化 |
+| `RestrictionEngineTest` | 14 | MockK mock DAO + 固定时间，覆盖即时锁定/每日时长/禁用时段的评估顺序与边界 |
+| `ImageBase64Test` | 5 | Robolectric 环境，覆盖正常压缩、大图缩放、空输入、异常流 |
+
+运行全部单元测试（PowerShell）：
+
+```powershell
+$env:JAVA_HOME = "G:\Android\jdk21"
+& "C:\Users\DELL\.gradle\wrapper\dists\gradle-8.9-bin\78qddjpeqn5v6yec3xb8kv9ca\gradle-8.9\bin\gradle.bat" :app:testDebugUnitTest --console=plain
+```
+
+测试依赖（JUnit4 / MockK / kotlinx-coroutines-test / Robolectric）在 `gradle/libs.versions.toml` 登记，`app/build.gradle.kts` 中通过 `testImplementation` 引入。详细架构与测试说明见 [ARCHITECTURE.md](ARCHITECTURE.md)。
 
 ## 豆包 API Key 配置
 

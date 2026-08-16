@@ -18,6 +18,9 @@ workManager = "2.9.1"
 coil = "2.7.0"
 accompanist = "0.34.0"
 splashscreen = "1.0.1"
+junit = "4.13.2"
+mockk = "1.13.12"
+robolectric = "4.13"
 
 [libraries]
 # AndroidX core
@@ -71,6 +74,12 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 
 # Accompanist permissions
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+
+# Test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -57,6 +57,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        unitTests {
+            // Robolectric 需要访问 Android 资源
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -114,4 +121,11 @@ dependencies {
 
     // Accompanist permissions
     implementation(libs.accompanist.permissions)
+
+    // Unit tests
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    // Robolectric：ImageBase64 依赖 Android 框架（Bitmap/Base64），需在 JVM 上模拟运行
+    testImplementation(libs.robolectric)
 }
