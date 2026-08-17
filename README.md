@@ -117,11 +117,11 @@ BuddyStudyGuard/
 2. 等待 Gradle Sync 完成（首次会下载依赖）。
 3. 连接 Android 8.0+ 真机，点 Run。
 
-> 命令行编译：项目未内置 `gradlew.bat`，请使用本机 Gradle 8.9 的 `gradle.bat` 或直接用 Android Studio 构建。示例（PowerShell）：
+> 命令行编译：项目已内置 Gradle Wrapper，无需手动安装 Gradle。示例（PowerShell）：
 >
 > ```powershell
 > $env:JAVA_HOME = "你的JDK路径"
-> & "你的Gradle路径\bin\gradle.bat" :app:assembleDebug --console=plain
+> .\gradlew.bat :app:assembleDebug --console=plain
 > ```
 
 ## 单元测试
@@ -138,7 +138,7 @@ BuddyStudyGuard/
 
 ```powershell
 $env:JAVA_HOME = "你的JDK路径"
-& "你的Gradle路径\bin\gradle.bat" :app:testDebugUnitTest --console=plain
+.\gradlew.bat :app:testDebugUnitTest --console=plain
 ```
 
 测试依赖（JUnit4 / MockK / kotlinx-coroutines-test / Robolectric）在 `gradle/libs.versions.toml` 登记，`app/build.gradle.kts` 中通过 `testImplementation` 引入。详细架构与测试说明见 [ARCHITECTURE.md](ARCHITECTURE.md)。
