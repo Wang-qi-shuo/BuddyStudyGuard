@@ -236,6 +236,12 @@ private fun AuthCheckScreen(
         }
 
         val identity: String? = try {
+            // 确保 access_token 有效；刷新失败说明会话已失效，回到登录页重新登录
+            if (!CloudBaseManager.ensureValidToken()) {
+                CloudBaseManager.logout()
+                onNotLoggedIn()
+                return@LaunchedEffect
+            }
             val result = withContext(Dispatchers.IO) {
                 CloudBaseManager.api.query(
                     CloudBaseManager.COLL_USERS,
@@ -248,7 +254,10 @@ private fun AuthCheckScreen(
                 null
             }
         } catch (_: Exception) {
-            null
+            // 查询失败（网络/认证异常）不能判定为"无身份"，回到登录页重新登录
+            CloudBaseManager.logout()
+            onNotLoggedIn()
+            return@LaunchedEffect
         }
 
         if (identity != null) {

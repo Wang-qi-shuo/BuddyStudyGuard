@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 /**
@@ -114,9 +115,17 @@ object CloudBaseApiService {
 
         val authInterceptor = Interceptor { chain ->
             val original = chain.request()
+            val path = original.url.encodedPath
+            // 登录/刷新接口不需要也不应附加 Authorization
+            val isAuthEndpoint = path.endsWith("/auth/v1/token") || path.endsWith("/auth/v1/signin")
+
+            // 非认证接口：若已登录且 access_token 过期，先静默刷新，避免 401
+            if (!isAuthEndpoint && CloudBaseManager.isLoggedIn()) {
+                runBlocking { CloudBaseManager.ensureValidToken() }
+            }
+
             val token = CloudBaseManager.getAccessToken()
-            val isRefresh = original.url.encodedPath.endsWith("/auth/v1/token")
-            val request = if (token != null && !isRefresh) {
+            val request = if (token != null && !isAuthEndpoint) {
                 original.newBuilder()
                     .header("Authorization", "Bearer $token")
                     .build()
